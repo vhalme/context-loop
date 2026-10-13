@@ -20,9 +20,9 @@ blocks anything.
 
 ## Status
 
-Early (0.1). The engine is in daily use on one large monorepo. `/context-loop:context init`,
-which sets up a new repo, is not written yet. Until it is, a repo needs
-`.claude/context/budgets.json` (copy `templates/budgets.json`) before the plugin does anything.
+Early (0.2). The engine is in daily use on one large monorepo. `/context-loop:context init`
+sets up a new repo: npm, pnpm and yarn workspaces or a single package, with or without an
+existing `CLAUDE.md` (it only appends; it never rewrites your content).
 
 ## Install
 
@@ -30,6 +30,16 @@ which sets up a new repo, is not written yet. Until it is, a repo needs
 /plugin marketplace add vhalme/context-loop
 /plugin install context-loop@context-loop
 ```
+
+Then, in the repo:
+
+```
+/context-loop:context init
+```
+
+It shows what it will create, asks two things (turn on the recall store? which dev agents?),
+creates the instance, and drafts `CLAUDE.md` content from your code for you to review. It
+never commits.
 
 The hooks act only in repos that have `.claude/context/budgets.json`. The recall store is
 opt-in through `.claude/context/project.json`; without it, no Docker container is started.

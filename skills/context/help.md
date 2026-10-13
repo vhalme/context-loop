@@ -7,7 +7,7 @@ it once before changing anything under `.claude/`.
 ## Setup
 
 A repo has a context-loop instance when it has `.claude/context/budgets.json`
-(`/context-loop:context init` is planned). The SessionStart hook prints a one-line health summary
+(set one up with `/context-loop:context init`). The SessionStart hook prints a one-line health summary
 and links `.claude/context/engine` to the installed plugin. The episodic recall store is optional: opt in with `.claude/context/project.json`
 (Docker Postgres + pgvector); without it, everything except recall over past sessions still works.
 

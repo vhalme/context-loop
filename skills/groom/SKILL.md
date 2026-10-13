@@ -11,7 +11,7 @@ it defines what to groom and what never to groom away). Grooming is the only ope
 deletes playbook entries. **Produce and curate stay separate** — add no new task learnings here.
 
 **Preconditions.** No `.claude/context/budgets.json` → say the repo has no context-loop instance
-yet (`/context-loop:context init` is planned) and stop. No `$ARGUMENTS` or no
+yet (set one up with `/context-loop:context init`) and stop. No `$ARGUMENTS` or no
 `.claude/knowledge/$ARGUMENTS.md` → list the playbooks in `.claude/knowledge/` and stop.
 
 ## Gate

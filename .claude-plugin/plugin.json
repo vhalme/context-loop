@@ -1,6 +1,6 @@
 {
   "name": "context-loop",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Layered, self-curating AI context for Claude Code: canon, wiki, agent playbooks, tracks and cross-layer recall, with a health check that keeps every layer current.",
   "author": { "name": "Vladimir Halme", "url": "https://github.com/vhalme" },
   "homepage": "https://github.com/vhalme/context-loop",

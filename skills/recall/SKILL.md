@@ -11,7 +11,7 @@ Recall for: **$ARGUMENTS**
 ## 1. Preconditions
 
 - No `.claude/context/budgets.json` → say the repo has no context-loop instance yet
-  (`/context-loop:context init` is planned) and stop.
+  (set one up with `/context-loop:context init`) and stop.
 - The store is **opt-in**: it is enabled only when `.claude/context/project.json` exists and does
   not set `"store": false`. Not enabled → say so and use the fallback in step 4.
 

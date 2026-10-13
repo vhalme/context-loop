@@ -1,7 +1,7 @@
 ---
 name: context
-description: Multi-layer AI-context operations — health check, sync cursor, status, help. Use when the session-start health line shows findings (run check), after a stretch of coding or after pulling others' commits (run sync), or when asked how the context system works (help).
-argument-hint: "[check|health [--scope S] [--with-store] [--snapshot] | sync | status | help]"
+description: Multi-layer AI-context operations — set up (init), health check, sync cursor, status, help. Use init when the user wants context-loop in a repo that has no .claude/context/budgets.json; check when the session-start health line shows findings; sync after a stretch of coding or after pulling others' commits; help when asked how the context system works.
+argument-hint: "[init | check|health [--scope S] [--with-store] [--snapshot] | sync | status | help]"
 ---
 # /context-loop:context — AI-context metadata management
 
@@ -17,9 +17,9 @@ Arguments: `$ARGUMENTS`
 
 ## Step 0 — Instance check
 
-`help` works anywhere. For every other subcommand: if the repo has no
-`.claude/context/budgets.json`, say the repo has no context-loop instance yet
-(`/context-loop:context init` is planned) and stop.
+`help` and `init` work anywhere. For every other subcommand: if the repo has no
+`.claude/context/budgets.json`, say the repo has no context-loop instance yet, offer
+`/context-loop:context init`, and stop.
 
 ## Step 1 — Resolve the subcommand
 
@@ -27,6 +27,7 @@ Parse `$ARGUMENTS`: the first whitespace-delimited token is the subcommand, the 
 
 | Subcommand | Procedure | Behavior |
 |---|---|---|
+| `init` | `${CLAUDE_SKILL_DIR}/workflows/init.md` | Create the instance: plan, ask (recall store, agents), apply, draft canon from the code. `<ENGINE>` in that file = `${CLAUDE_PLUGIN_ROOT}`. **Never overwrites existing content; never commits.** |
 | `check` / `health` | `${CLAUDE_SKILL_DIR}/workflows/check.md` | Run `node "${CLAUDE_PLUGIN_ROOT}/scripts/context-health.mjs" [--scope <s>] [--with-store] [--snapshot]`; report stdout verbatim. No LLM analysis. |
 | `sync` | `${CLAUDE_SKILL_DIR}/workflows/sync.md` | Read cursor, plan, ask, execute, advance cursor. **Plan-first — never write without user confirmation.** |
 | `status` | (trivial) | Read `.claude/context/state.json` and pretty-print it. Missing or `null` fields → "never synced." |
@@ -47,7 +48,7 @@ windows, entry limits) live in `.claude/context/budgets.json`.
    - both → `check` first (cheap), `sync` after triage;
    - neither → "Context is in sync and clean. Nothing to do."
 
-## Step 2 — Execute (check / sync)
+## Step 2 — Execute (init / check / sync)
 
 Read the procedure file named in the table, then follow its Procedure section to the letter —
 do not improvise. Where it says `node .claude/context/engine/scripts/<script>.mjs`, you may run

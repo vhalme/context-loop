@@ -14,7 +14,7 @@ any future session (or a parallel agent) picks it up exactly where the last one 
 full model is `${CLAUDE_PLUGIN_ROOT}/specs/tracks.md`.
 
 **Precondition.** No `.claude/context/budgets.json` → say the repo has no context-loop instance
-yet (`/context-loop:context init` is planned) and stop.
+yet (set one up with `/context-loop:context init`) and stop.
 
 ## Subcommands
 
