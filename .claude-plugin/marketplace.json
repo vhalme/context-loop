@@ -1,0 +1,16 @@
+{
+  "name": "context-loop",
+  "owner": {
+    "name": "Vladimir Halme",
+    "url": "https://github.com/vhalme"
+  },
+  "description": "The context-loop plugin: self-curating, layered AI context for Claude Code.",
+  "plugins": [
+    {
+      "name": "context-loop",
+      "source": "./",
+      "description": "Layered, self-curating AI context for Claude Code: canon, wiki, agent playbooks, tracks and cross-layer recall, with a health check that keeps every layer current.",
+      "version": "0.1.0"
+    }
+  ]
+}

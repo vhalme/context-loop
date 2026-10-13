@@ -1,0 +1,94 @@
+{
+  "_doc": "Single source of size/freshness budgets for every AI-context layer. Read by context-health.mjs (via context-config.mjs) and quoted by /update-knowledge and the wiki/playbook/track specs. Its presence marks the repo as a context-loop instance. Bytes unless stated. soft = WARN, hard = BROKEN.",
+  "canonical": {
+    "_files": "Budget per auto-loaded canonical file. An exact path wins; otherwise the first matching glob in key order (* matches one path segment). The apps/* and packages/* patterns are examples that /context init rewrites to this repo's workspace roots; add an exact-path entry to give one workspace a different budget.",
+    "files": {
+      "CLAUDE.md": {
+        "soft": 12288,
+        "hard": 16384
+      },
+      "apps/*/CLAUDE.md": {
+        "soft": 12288,
+        "hard": 22528
+      },
+      "packages/*/CLAUDE.md": {
+        "soft": 4096,
+        "hard": 8192
+      },
+      ".claude/rules/*.md": {
+        "soft": 3072,
+        "hard": 5120
+      }
+    },
+    "lineBytes": {
+      "soft": 300,
+      "hard": 500
+    },
+    "_optionalWorkspaces": "workspaces that need no CLAUDE.md: config packages, and libraries whose canon is a wiki subsystem page or a sibling's CLAUDE.md",
+    "optionalWorkspaces": [],
+    "versionClaims": {
+      "_doc": "Root CLAUDE.md tech-stack rows checked against the installed majors. Each check: { \"label\": regex on the row text with the major in group 1, e.g. \"React (\\\\d+)\", \"dep\": package name, e.g. \"react\", \"from\": workspace package.json that declares it, e.g. \"apps/web/package.json\" }.",
+      "checks": []
+    }
+  },
+  "wiki": {
+    "statusVocabulary": [
+      "stable",
+      "draft",
+      "stub",
+      "stale"
+    ],
+    "stableMaxAgeDays": 30,
+    "staleAfterDays": 90,
+    "lines": {
+      "entity": {
+        "soft": 200,
+        "hard": 300
+      },
+      "flow": {
+        "soft": 300,
+        "hard": 400
+      },
+      "subsystem": {
+        "soft": 200,
+        "hard": 300
+      },
+      "workflow": {
+        "soft": 250,
+        "hard": 350
+      }
+    },
+    "indexMaxLines": 200,
+    "listMax": {
+      "sources": 8,
+      "related": 8
+    }
+  },
+  "playbooks": {
+    "bytes": {
+      "soft": 30720,
+      "hard": 40960
+    },
+    "entries": {
+      "soft": 40,
+      "hard": 60
+    }
+  },
+  "tracks": {
+    "statusVocabulary": [
+      "proposed",
+      "active",
+      "blocked",
+      "paused",
+      "done",
+      "abandoned"
+    ],
+    "activeStaleDays": 45,
+    "nextActionMaxChars": 220
+  },
+  "agents": {
+    "maxTurns": 80,
+    "_surfaces": "path prefixes per dev agent (one key per .claude/agents/<agent>.md that keeps a playbook), e.g. { \"web-dev\": [\"apps/web/\"], \"core-dev\": [\"packages/core/\"] }. knowledge-recall.mjs --surface/--candidates uses them to pick episodic records on that agent's surface.",
+    "surfaces": {}
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "_doc": "Context-loop instance identity, read only via context-config.mjs. project = slug the store defaults derive from (lowercased, non-alphanumerics -> '-'). store = the local pgvector container the episodic layer writes to; every omitted key derives from the slug: container '<project>-knowledge-postgres', volume '<project>-knowledge-data', image 'pgvector/pgvector:pg17', port 5434, user 'postgres', password 'knowledge', database '<project>_knowledge'. Set \"store\": false to disable the episodic layer (no hook starts Docker or writes a database). KNOWLEDGE_DB_URL (env or .claude/.env.knowledge) overrides the derived URL. entities = the domain nouns the session distiller and kb: markers tag records with. Thresholds live in budgets.json.",
+  "project": "<project>",
+  "store": {},
+  "entities": []
+}

@@ -1,0 +1,21 @@
+{
+  "description": "context-loop automation. Each script acts only in a repo with a context-loop instance (.claude/context/budgets.json); the knowledge store additionally needs .claude/context/project.json. All exit 0 and never block a session.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/engine-link.mjs\"" },
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/context-health.mjs\" --summary" },
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/knowledge-ensure.mjs\"" }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/knowledge-hook.mjs\"" }
+        ]
+      }
+    ]
+  }
+}
