@@ -470,7 +470,7 @@ if (flag('json')) {
   const fixes = [];
   for (const sev of ['BROKEN', 'WARN']) for (const f of findings) if (f.severity === sev && f.fix && !fixes.includes(f.fix) && fixes.length < 3) fixes.push(f.fix);
   const head = metrics.findings.broken + metrics.findings.warn === 0 ? 'context-health: clean' : `context-health: ${metrics.findings.broken} broken · ${metrics.findings.warn} warn (${parts.join(', ')})`;
-  console.log(`${head}${fixes.length ? ` → ${fixes.join(' · ')}` : ''} — details: /context check`);
+  console.log(`${head}${fixes.length ? ` → ${fixes.join(' · ')}` : ''} — details: /context-loop:context check`);
 } else {
   if (!findings.length) { console.log(`context-health (scope: ${scope}): clean.`); process.exit(0); }
   console.log(`context-health (scope: ${scope}): ${metrics.findings.broken} broken · ${metrics.findings.warn} warnings · ${metrics.findings.info} info\n`);

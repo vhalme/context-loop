@@ -29,6 +29,13 @@ export function scriptCmd(name, root = repoRoot()) {
   return `node ${rel.startsWith('..') ? `"${abs}"` : rel}`;
 }
 
+// True when the calling module is the script being run. Compares real paths: scripts are usually
+// invoked through the .claude/context/engine symlink, while import.meta.url is already resolved.
+export function isMain(metaUrl) {
+  try { return !!process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(metaUrl)); }
+  catch { return false; }
+}
+
 // The repo the scripts act on — never the scripts' own location. git, run in the hook-provided
 // project dir when there is one (else cwd), so worktrees resolve to themselves.
 export function repoRoot() {

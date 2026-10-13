@@ -14,6 +14,7 @@
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
+import { isMain } from './context-config.mjs';
 
 const STATUS_ORDER = ['active', 'blocked', 'paused', 'proposed', 'done', 'abandoned'];
 const DEFAULT_NEXT_MAX = 220;
@@ -142,7 +143,7 @@ export function render(repoRoot, opts = {}) {
 }
 
 // ---- CLI ----
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+if (isMain(import.meta.url)) {
   const { repoRoot: resolveRoot, loadBudgets, scriptCmd } = await import('./context-config.mjs');
   const repoRoot = resolveRoot();
   const budgets = loadBudgets(repoRoot);

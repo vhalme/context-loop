@@ -32,7 +32,7 @@ import { tmpdir, homedir } from 'os';
 import pg from 'pg';
 import dotenv from 'dotenv';
 import { pipeline } from '@huggingface/transformers';
-import { repoRoot, loadProject, storeUrl, pathAnchors } from './context-config.mjs';
+import { repoRoot, loadProject, storeUrl, pathAnchors, isMain } from './context-config.mjs';
 
 const REPO_ROOT = repoRoot();
 const PROJECT = loadProject(REPO_ROOT);
@@ -466,6 +466,6 @@ async function main() {
   } finally { await client.end(); }
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+if (isMain(import.meta.url)) {
   main().catch(e => { console.error(e); process.exit(1); });
 }

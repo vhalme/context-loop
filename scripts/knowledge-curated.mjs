@@ -21,7 +21,7 @@ import { createHash } from 'crypto';
 import { join, relative } from 'path';
 import { fileURLToPath } from 'url';
 import { parseFrontmatter, loadTracks } from './tracks-index.mjs';
-import { repoRoot } from './context-config.mjs';
+import { repoRoot, isMain } from './context-config.mjs';
 
 const REPO_ROOT = repoRoot();
 const MAX_CHUNK = 1600;      // chars per embedded unit (bge-small truncates ~512 tokens anyway)
@@ -218,7 +218,7 @@ export async function indexCurated(client, cfg, opts = {}) {
 }
 
 // ---- CLI ----
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+if (isMain(import.meta.url)) {
   const args = process.argv.slice(2);
   const dryRun = args.includes('--dry-run');
   const { loadConfig } = await import('./knowledge-ingest.mjs');
